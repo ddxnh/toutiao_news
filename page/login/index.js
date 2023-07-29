@@ -9,6 +9,15 @@
 document.querySelector('.btn').addEventListener('click', e => {
   const form = document.querySelector('.login-form')
   const data = serialize(form, { hash: true, empty: true })
+  console.log(data)
+  if (data.mobile.length !== 11) {
+    myAlert(false, '手机号码要11位')
+    return
+  }
+  if (data.code.length !== 6) {
+    myAlert(false, '验证码要6位')
+    return
+  }
   axios({
     url: '/v1_0/authorizations',
     method: 'POST',
